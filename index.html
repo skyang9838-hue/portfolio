@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>양상경 · 인천효성남초등학교 교사</title>
+  <meta name="description" content="인천효성남초등학교 교사 양상경. 만든 웹앱과 2025~2026 강의·위촉·수상·연수 기록.">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#17171C" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="양상경 · 인천효성남초등학교 교사">
+  <meta property="og:description" content="만든 웹앱과 2025~2026 강의·위촉·수상·연수 기록">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233182F6'/%3E%3Ctext x='16' y='22' font-size='16' font-family='sans-serif' font-weight='700' fill='white' text-anchor='middle'%3E양%3C/text%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar__in">
+      <a class="topbar__name" href="#top">양상경</a>
+      <nav aria-label="주 메뉴">
+        <ul class="topbar__nav">
+          <li><a href="#apps">웹앱</a></li>
+          <li><a href="#career">경력</a></li>
+          <li><a href="#contact">연락</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- ① 히어로 -->
+    <section class="hero wrap wrap--wide" id="top" aria-labelledby="hero-name">
+      <p class="hero__meta">인천효성남초등학교 교사 · AI·바이브코딩</p>
+      <h1 class="hero__name" id="hero-name">양상경</h1>
+      <p class="hero__intro">수업에 필요한 도구를 AI로 직접 만들고, 만드는 법을 선생님들과 나눕니다.</p>
+      <p class="hero__cred">초등 1급 정교사 · 경인교육대학교 교육전문대학원 인공지능융합교육전공 석사과정</p>
+
+      <div class="stats" id="stats" aria-label="확인된 기록 요약">
+        <!-- script.js가 data.js에서 확인된 항목만 세어 채운다 -->
+      </div>
+      <p class="stats__asof"><time data-asof datetime="2026-11-07">2026.11.07 기준</time></p>
+
+      <p class="hero__mail"><a class="link" href="mailto:skyang9838@gmail.com">skyang9838@gmail.com</a></p>
+    </section>
+
+    <!-- ② 웹앱 -->
+    <section class="section wrap wrap--wide reveal" id="apps" aria-labelledby="apps-title">
+      <div class="section__head">
+        <h2 class="section__title" id="apps-title">웹앱</h2>
+        <a class="section__aside link" href="https://github.com/skyang9838-hue" target="_blank" rel="noopener">github.com/skyang9838-hue <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div id="featured"></div>
+      <h3 class="subhead">그 밖의 앱</h3>
+      <ul class="apps" id="apps-list" role="list"></ul>
+      <noscript><p class="noscript">웹앱 목록은 자바스크립트를 켜야 보입니다. <a class="link" href="https://github.com/skyang9838-hue">GitHub에서 보기</a></p></noscript>
+    </section>
+
+    <!-- ③ 경력 -->
+    <section class="section wrap reveal" id="career" aria-labelledby="career-title">
+      <div class="section__head">
+        <h2 class="section__title" id="career-title">경력 <span class="section__range">2025 – 2026</span></h2>
+      </div>
+
+      <p class="highlight" id="highlight" hidden></p>
+
+      <div class="chips" role="group" aria-label="경력 종류 고르기">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">전체</button>
+        <button class="chip" type="button" data-filter="talks" aria-pressed="false">강의·발표</button>
+        <button class="chip" type="button" data-filter="roles" aria-pressed="false">위촉·연구회·지원</button>
+        <button class="chip" type="button" data-filter="awards" aria-pressed="false">수상</button>
+        <button class="chip" type="button" data-filter="training" aria-pressed="false">받은 연수</button>
+      </div>
+
+      <div class="log" id="log" aria-live="polite"></div>
+      <noscript><p class="noscript">경력 목록은 자바스크립트를 켜야 보입니다.</p></noscript>
+    </section>
+
+    <!-- ④ 연락 -->
+    <section class="section wrap reveal" id="contact" aria-labelledby="contact-title">
+      <div class="section__head">
+        <h2 class="section__title" id="contact-title">연락</h2>
+      </div>
+      <ul class="contact" role="list">
+        <li class="contact__row contact__row--mail">
+          <a class="contact__link contact__link--mail" href="mailto:skyang9838@gmail.com">
+            <span>skyang9838@gmail.com</span>
+          </a>
+          <button class="copy" type="button" data-copy="skyang9838@gmail.com" aria-label="이메일 주소 복사">
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy__label">복사</span>
+          </button>
+        </li>
+        <li class="contact__row">
+          <a class="contact__link" href="https://www.threads.com/@yang.__.98" target="_blank" rel="noopener me">
+            <span><span class="contact__k">Threads</span> @yang.__.98</span><span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="contact__row">
+          <a class="contact__link" href="https://github.com/skyang9838-hue" target="_blank" rel="noopener me">
+            <span><span class="contact__k">GitHub</span> skyang9838-hue</span><span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <p>© 2026 양상경 · <time data-asof datetime="2026-11-07">2026.11.07 기준</time></p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
