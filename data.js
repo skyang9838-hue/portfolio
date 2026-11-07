@@ -117,12 +117,9 @@ window.SITE = {
     { type: 'training', date: '2026-06-05', label: '2026.06.05', title: '디지털 교육 전문적학습공동체 연합 연수 「학생의 정보화 교육자료 개발 방법론」', org: '인천부내초등학교 주관', role: '', status: '' },
     { type: 'training', date: '2026-06-08', label: '2026.06.08 – 22', title: '북부 초등 「AI·디지털 기반 교육과정-수업-평가 실천」 연수 (3회)', org: '인천광역시북부교육지원청', role: '', status: '' },
     { type: 'training', date: '2026-07-01', label: '2026', title: '영재교육 담당교원 역량강화 원격직무연수', org: '인천광역시교육청 융합인재교육과', role: '원격직무연수', status: '' },
-    { type: 'training', date: '2025-06-25', label: '2025.06.25', title: '퍼실리테이션 연수', org: '', role: '', status: '' },
     { type: 'training', date: '2025-12-17', label: '2025.12.17', title: 'SE4A 연수', org: 'SE4A 전문적학습공동체', role: '', status: '' },
-    { type: 'training', date: '2025-12-21', label: '2025.12.21', title: '바이브 코딩 연수', org: '', role: '', status: '' },
     { type: 'training', date: '2026-06-30', label: '2026.06.30', title: '디지털 교육 전문적학습공동체 연합 연수 「클로드코드 첫걸음: 설치부터 첫 코딩까지」', org: 'ITPC · 인천마전초등학교 주관', role: '', status: '' },
     { type: 'training', date: '2026-07-02', label: '2026.07.02', title: '진로 연수 「선호미래」', org: '인천광역시교육청AI융합교육원', role: '2시간', status: '' },
-    { type: 'training', date: '2026-07-14', label: '2026.07.14', title: '구글 공인 교육자 Level 2 인증 연계 직무연수', org: '인천광역시교육청AI융합교육원', role: '2차시', status: '' },
     { type: 'training', date: '2026-07-29', label: '2026.07.29 – 09.19', title: '초등 학생평가 전문가 양성 직무연수 (기본과정)', org: '인천광역시교육청 초등교육과', role: '30차시', status: '' },
     { type: 'training', date: '2026-11-19', label: '2026.11.19', title: '찾아가는 과학발명교실연수 「디지털 도구 활용 메이커 발명 연수」', org: '인천광역시교육청 융합인재교육과 · 발명교육지원단', role: '', status: '예정' }
   ]
