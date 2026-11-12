@@ -80,6 +80,18 @@ window.SITE = {
       alt: '성 쌓기 땅따먹기 첫 화면. 픽셀 그림 풀밭 판과 영토 점수판'
     },
     {
+      id: 'class-soccer',
+      name: '교실 축구',
+      state: 'live',
+      desc: '반 아이들이 각자 노트북으로 접속해 다 같이 뛰는 도트 축구.',
+      linked: '교실 수업에서 사용 · 2026.11',
+      tags: ['Cloudflare Workers', 'Canvas'],
+      url: 'https://class-soccer.class-soccer.workers.dev',
+      meta: 'class-soccer.workers.dev',
+      img: 'assets/class-soccer.webp', imgW: 1280, imgH: 800,
+      alt: '교실 축구 경기 화면. 도트 그림 빨강·파랑 선수들과 점수판'
+    },
+    {
       id: 'geupji',
       name: '급지.gg',
       state: 'wip',
