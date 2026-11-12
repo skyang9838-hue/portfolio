@@ -70,7 +70,7 @@
   if (f) {
     document.getElementById('featured').innerHTML =
       '<article class="feature" aria-labelledby="app-' + f.id + '">' +
-        '<div class="feature__media"><a href="' + f.url + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">' + shot(f, false) + '</a></div>' +
+        '<div class="feature__media">' + (f.url ? '<a href="' + f.url + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">' + shot(f, false) + '</a>' : shot(f, false)) + '</div>' +
         '<div class="feature__body">' +
           '<div class="badges"><span class="badge badge--accent badge--strong">대표작</span>' + stateBadge(f) + '</div>' +
           '<h3 class="feature__name" id="app-' + f.id + '">' + esc(f.name) + ' <small>' + esc(f.nameEn) + '</small></h3>' +
@@ -78,8 +78,8 @@
           '<p class="feature__award">' + AWARD_ICON + '<span>' + esc(f.award) + (f.awardDate ? ' <span class="award__date"><span class="award__sep">· </span>' + esc(f.awardDate) + '</span>' : '') + '</span></p>' +
           '<ul class="tags" role="list" aria-label="기술">' + f.tags.map(function (t) { return '<li class="tag">' + esc(t) + '</li>'; }).join('') + '</ul>' +
           '<div class="feature__links">' +
-            '<a class="btn btn--primary" href="' + f.url + '" target="_blank" rel="noopener">앱 열기 <span class="arrow" aria-hidden="true">↗</span></a>' +
-            '<a class="btn btn--ghost" href="' + f.repo + '" target="_blank" rel="noopener">코드 보기 <span class="arrow" aria-hidden="true">↗</span></a>' +
+            (f.url ? '<a class="btn btn--primary" href="' + f.url + '" target="_blank" rel="noopener">앱 열기 <span class="arrow" aria-hidden="true">↗</span></a>' : '') +
+            (f.repo ? '<a class="btn btn--ghost" href="' + f.repo + '" target="_blank" rel="noopener">코드 보기 <span class="arrow" aria-hidden="true">↗</span></a>' : '') +
           '</div>' +
         '</div>' +
       '</article>';

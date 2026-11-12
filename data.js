@@ -20,12 +20,12 @@ window.SITE = {
       featured: true,
       name: '디노 글쓰기 코치',
       nameEn: 'DINO',
-      state: 'live',
+      state: 'wip',
       desc: "학생이 글을 쓰고 AI 코칭을 받아 고칠수록 '도달도'가 오르는 초등 교실 글쓰기 코치.",
       award: '제5회 인천 초등 수업사례 공모전 교육감상',
       awardDate: '2026.10',
       tags: ['Next.js', 'Prisma', 'Postgres', 'Gemini API'],
-      url: 'https://dino-writing-coach.vercel.app',
+      url: null,  /* 미완성이라 앱 링크 내림 (2026-11-12) */
       repo: 'https://github.com/skyang9838-hue/dino-writing-coach',
       img: 'assets/dino.webp', imgW: 1320, imgH: 825,
       alt: '디노 글쓰기 코치가 학생 글에 준 피드백 화면. 좋은 점 한 가지와 수정 미션 두 가지'
