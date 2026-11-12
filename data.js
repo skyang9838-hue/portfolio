@@ -31,6 +31,19 @@ window.SITE = {
       alt: '디노 글쓰기 코치가 학생 글에 준 피드백 화면. 좋은 점 한 가지와 수정 미션 두 가지'
     },
     {
+      id: 'climate',
+      name: '기후 탐사대',
+      sub: '서·논술형 평가 웹앱',
+      state: 'live',
+      desc: '6학년 사회 「세계의 기후와 다양한 생활 모습」 서·논술형 평가를, 기후 정령의 지도를 되찾는 탐사 이야기 속에서 수행한다. 답안은 구글 시트로 모인다.',
+      linked: '서·논술형 평가 설계 연수 산출물 · 2026.09',
+      tags: ['Google Apps Script', 'Google Sheets'],
+      url: 'https://script.google.com/macros/s/AKfycby-ahsOSiTpGR5fnvS9rUhULYY-_Q_gzD_6qBsE_oNrCvPp4sslgJspycZDIjNjITNraQ/exec',
+      meta: 'Google Apps Script',
+      img: 'assets/climate.webp', imgW: 1280, imgH: 800,
+      alt: '기후 탐사대 첫 화면. 열대·온대·한대 풍경 앞의 기후 정령들과 학교·반·번호 입력칸'
+    },
+    {
       id: 'tqqq',
       name: 'TQQQ 시뮬레이터',
       sub: '레버리지의 대가',
