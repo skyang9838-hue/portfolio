@@ -12,7 +12,7 @@
   기간 label은 해가 같으면 뒤 연도를 뺀다 (2026.07 – 11).
 */
 window.SITE = {
-  asOf: '2026-11-07',
+  asOf: '2026-11-12',
 
   apps: [
     {
@@ -102,7 +102,7 @@ window.SITE = {
     { type: 'role', date: '2026-07-16', label: '2026.07 – 11', title: '읽걷쓰 기반 AI 융합교육(STEAM) 시범 적용 교사단', org: '인천광역시교육청 AI융합교육원', role: '컨설팅 위원', status: '' },
     { type: 'role', date: '2026-10-03', label: '2026.10.03', title: '2026 북부 모두다 문화예술축제', org: '북부교육지원청', role: '운영 지원단', status: '' },
     { type: 'role', date: '2026-10-23', label: '2026.10.23 – 10.24', title: '인천과학대제전 보드게임 체험 부스', org: '발명교육지원단', role: '운영', status: '' },
-    { type: 'role', date: '2026-11-09', label: '2026.11.09', title: '발명교육 봉사 (인천해서초)', org: '발명교육지원단', role: '봉사', status: '예정' },
+    { type: 'role', date: '2026-11-09', label: '2026.11.09', title: '발명교육 봉사 (인천해서초)', org: '발명교육지원단', role: '봉사', status: '' },
 
     /* ── 수상 ── */
     { type: 'award', featured: true, date: '2026-10-14', label: '2026.10.14', title: '제5회 인천 초등 수업사례 공모전 (글쓰기 수업 AI 코칭·DINO)', org: '인천광역시교육청', role: '교육감상', status: '' },
@@ -122,6 +122,7 @@ window.SITE = {
     { type: 'training', date: '2026-06-30', label: '2026.06.30', title: '디지털 교육 전문적학습공동체 연합 연수 「클로드코드 첫걸음: 설치부터 첫 코딩까지」', org: 'ITPC · 인천마전초등학교 주관', role: '', status: '' },
     { type: 'training', date: '2026-07-02', label: '2026.07.02', title: '진로 연수 「선호미래」', org: '인천광역시교육청AI융합교육원', role: '2시간', status: '' },
     { type: 'training', date: '2026-07-29', label: '2026.07.29 – 09.19', title: '초등 학생평가 전문가 양성 직무연수 (기본과정)', org: '인천광역시교육청 초등교육과', role: '30차시', status: '' },
+    { type: 'training', date: '2026-11-07', label: '2026.11.07', title: '제2회 ACE 러닝페스티벌 「AI와 교육, 실전 수업 사례 나눔」', org: 'ACE연구회', role: '', status: '' },
     { type: 'training', date: '2026-11-19', label: '2026.11.19', title: '찾아가는 과학발명교실연수 「디지털 도구 활용 메이커 발명 연수」', org: '인천광역시교육청 융합인재교육과 · 발명교육지원단', role: '', status: '예정' }
   ]
 };
