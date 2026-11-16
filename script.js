@@ -4,7 +4,7 @@
   if (!S) return;
 
   var HIDDEN = { '확인 필요': 1, '넣을지 확인': 1 };
-  var TYPE_OF_FILTER = { talks: 'talk', roles: 'role', awards: 'award', training: 'training' };
+  var TYPE_OF_FILTER = { talks: 'talk', awards: 'award', training: 'training' };  // 위촉·연구회는 화면에서 뺌 (데이터는 data.js에 남김)
   var ACCENT_ROLES = { '강사': 1 };
 
   function esc(s) {
@@ -36,20 +36,36 @@
     });
   }
 
-  /* ───── 숫자 띠 ───── */
-  function count(type) { return visible.filter(function (c) { return c.type === type && isConfirmed(c); }).length; }
-  var liveApps = S.apps.filter(function (a) { return a.state === 'live'; }).length;
-  var stats = [
-    { n: count('talk'), unit: '회', label: '강의·발표' },
-    { n: liveApps, unit: '개', label: '공개한 웹앱' },
-    { n: count('role'), unit: '건', label: '위촉·연구회·지원' },
-    { n: count('award'), unit: '건', label: '수상' }
-  ];
-  var statsEl = document.getElementById('stats');
-  statsEl.innerHTML = stats.map(function (s) {
-    return '<div class="stat"><span class="stat__num">' + s.n + '<small>' + s.unit + '</small></span>' +
-      '<span class="stat__label">' + esc(s.label) + '</span></div>';
-  }).join('');
+
+  /* ───── SNS ───── */
+  var SNS_ICONS = {"threads": "<svg aria-hidden=\"true\" width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M17.7 11.1c-.1 0-.2-.1-.3-.1-.2-3.2-1.9-5-4.8-5h-.1c-1.7 0-3.2.7-4.1 2.1l1.6 1.1c.7-1 1.7-1.2 2.5-1.2 1 0 1.8.3 2.3.9.4.4.6 1 .7 1.8-.8-.1-1.7-.2-2.6-.1-2.6.2-4.3 1.7-4.2 3.8.1 1.1.6 2 1.5 2.6.8.5 1.8.8 2.8.7 1.4-.1 2.5-.6 3.3-1.6.6-.7 1-1.7 1.1-2.9.7.4 1.2 1 1.5 1.6.5 1.1.5 2.9-1 4.4-1.3 1.3-2.8 1.8-5.2 1.8-2.6 0-4.5-.8-5.8-2.5C6 16.9 5.4 14.7 5.3 12c.1-2.7.7-4.9 1.9-6.5C8.4 3.8 10.4 3 13 3c2.6 0 4.6.8 5.9 2.5.7.8 1.1 1.8 1.4 3l1.9-.5c-.4-1.4-1-2.7-1.8-3.7C18.7 2.1 16.2 1 13 1h-.1C9.7 1 7.2 2.1 5.6 4.3 4.1 6.2 3.4 8.8 3.3 12c.1 3.2.8 5.8 2.3 7.7C7.2 21.9 9.7 23 12.9 23h.1c2.8 0 4.8-.7 6.5-2.4 2.2-2.2 2.1-4.9 1.4-6.6-.5-1.2-1.6-2.2-3.2-2.9zm-4.9 4.6c-1.1.1-2.3-.4-2.3-1.5 0-.8.6-1.7 2.4-1.8h.6c.7 0 1.3.1 1.9.2-.2 2.7-1.5 3-2.6 3.1z\"/></svg>"};
+  var snsList = S.sns || [];
+  var snsEl = document.getElementById('sns-list');
+  if (snsEl) {
+    snsEl.classList.toggle('sns--many', snsList.length > 1);
+    snsEl.innerHTML = snsList.map(function (n) {
+      return '<li><a class="sns-card" href="' + n.url + '" target="_blank" rel="noopener me">' +
+        '<span class="sns-card__icon">' + (SNS_ICONS[n.id] || '') + '</span>' +
+        '<span class="sns-card__body"><span class="sns-card__name">' + esc(n.name) + '<small>' + esc(n.handle) + '</small></span>' +
+        (n.desc ? '<span class="sns-card__desc">' + esc(n.desc) + '</span>' : '') + '</span>' +
+        '<span class="arrow" aria-hidden="true">↗</span></a></li>';
+    }).join('');
+  }
+
+  /* ───── 테마 (기본 다크, 고른 값 기억) ───── */
+  var themeBtn = document.getElementById('theme-btn');
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    var meta = document.getElementById('theme-color');
+    if (meta) meta.setAttribute('content', t === 'light' ? '#FFFFFF' : '#17171C');
+    if (themeBtn) themeBtn.setAttribute('aria-label', t === 'light' ? '어두운 화면으로 바꾸기' : '밝은 화면으로 바꾸기');
+  }
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+  if (themeBtn) themeBtn.addEventListener('click', function () {
+    var t = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(t);
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  });
 
   /* ───── 웹앱 ───── */
   var AWARD_ICON = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>';
@@ -198,7 +214,7 @@
 
   var logEl = document.getElementById('log');
   function render(filter) {
-    var list = filter === 'all' ? visible : visible.filter(function (c) { return c.type === TYPE_OF_FILTER[filter]; });
+    var list = visible.filter(function (c) { return c.type === TYPE_OF_FILTER[filter]; });
     var entries = buildEntries(list);
     if (!entries.length) { logEl.innerHTML = '<p class="empty">항목이 없습니다.</p>'; return; }
     var years = {}, order = [];
@@ -227,7 +243,7 @@
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function setFilter(k, fromUser) {
-    if (!TYPE_OF_FILTER[k] && k !== 'all') k = 'all';
+    if (!TYPE_OF_FILTER[k]) k = 'talks';
     chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.getAttribute('data-filter') === k)); });
     if (fromUser && !reduce) {
       logEl.classList.add('is-fading');
@@ -249,7 +265,7 @@
     }
     return false;
   }
-  if (!fromHash()) render('all');
+  if (!fromHash()) render('talks');
   window.addEventListener('hashchange', fromHash);
 
   /* ───── 상단 바 선 ───── */
