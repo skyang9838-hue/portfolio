@@ -2,6 +2,8 @@
   'use strict';
   var S = window.SITE;
   if (!S) return;
+  // 관리자 모드(?admin): admin.js가 켠다. 숨긴 항목도 흐리게 보이고, 카드를 누르면 편집 창이 열린다
+  var ADMIN = /[?&]admin\b/.test(location.search) || location.hash === '#admin';
 
   var HIDDEN = { '확인 필요': 1, '넣을지 확인': 1 };
   var TYPE_OF_FILTER = { talks: 'talk', awards: 'award', training: 'training' };  // 위촉·연구회는 화면에서 뺌 (데이터는 data.js에 남김)
@@ -19,7 +21,11 @@
   }
 
   var TODAY = today0();
-  var visible = S.career.filter(function (c) { return !HIDDEN[c.status]; });
+  var visible;
+  function computeVisible() {
+    visible = S.career.filter(function (c) { return !HIDDEN[c.status] && (ADMIN || !c.hidden); });
+  }
+  computeVisible();
   function isConfirmed(c) { return c.status === ''; }
   // 예정 항목이 날짜가 지나면 모양만 '지난 일'로. 숫자 띠에는 status가 바뀌기 전까지 세지 않는다.
   function isUpcoming(c) {
@@ -71,10 +77,12 @@
   var AWARD_ICON = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>';
 
   function stateBadge(a) {
-    return a.state === 'live'
+    var hid = a.hidden ? '<span class="badge badge--hidden">숨김</span>' : '';
+    return hid + (a.state === 'live'
       ? '<span class="badge"><span class="dot dot--ok"></span>공개 중</span>'
-      : '<span class="badge"><span class="dot dot--wip"></span>개발 중</span>';
+      : '<span class="badge"><span class="dot dot--wip"></span>개발 중</span>');
   }
+  function appAttrs(a) { return ' data-app="' + esc(a.id) + '"' + (a.hidden ? ' data-hidden' : ''); }
   function shot(a, eager) {
     var inner = a.img
       ? '<img class="shot__img" src="' + a.img + '" width="' + a.imgW + '" height="' + a.imgH + '" alt="' + esc(a.alt) + '"' + (eager ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async">'
@@ -82,16 +90,19 @@
     return '<div class="shot"><div class="shot__bar" aria-hidden="true"></div>' + inner + '</div>';
   }
 
-  var f = S.apps.filter(function (a) { return a.featured; })[0];
+  function renderApps() {
+  var shown = S.apps.filter(function (a) { return ADMIN || !a.hidden; });
+  var f = shown.filter(function (a) { return a.featured; })[0];
+  document.getElementById('featured').innerHTML = '';
   if (f) {
     document.getElementById('featured').innerHTML =
-      '<article class="feature" aria-labelledby="app-' + f.id + '">' +
+      '<article class="feature"' + appAttrs(f) + ' aria-labelledby="app-' + f.id + '">' +
         '<div class="feature__media">' + (f.url ? '<a href="' + f.url + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">' + shot(f, false) + '</a>' : shot(f, false)) + '</div>' +
         '<div class="feature__body">' +
           '<div class="badges"><span class="badge badge--accent badge--strong">대표작</span>' + stateBadge(f) + '</div>' +
-          '<h3 class="feature__name" id="app-' + f.id + '">' + esc(f.name) + ' <small>' + esc(f.nameEn) + '</small></h3>' +
+          '<h3 class="feature__name" id="app-' + f.id + '">' + esc(f.name) + (f.nameEn ? ' <small>' + esc(f.nameEn) + '</small>' : '') + '</h3>' +
           '<p class="feature__desc">' + esc(f.desc) + '</p>' +
-          '<p class="feature__award">' + AWARD_ICON + '<span>' + esc(f.award) + (f.awardDate ? ' <span class="award__date"><span class="award__sep">· </span>' + esc(f.awardDate) + '</span>' : '') + '</span></p>' +
+          (f.award ? '<p class="feature__award">' + AWARD_ICON + '<span>' + esc(f.award) + (f.awardDate ? ' <span class="award__date"><span class="award__sep">· </span>' + esc(f.awardDate) + '</span>' : '') + '</span></p>' : '') +
           '<ul class="tags" role="list" aria-label="기술">' + f.tags.map(function (t) { return '<li class="tag">' + esc(t) + '</li>'; }).join('') + '</ul>' +
           '<div class="feature__links">' +
             (f.url ? '<a class="btn btn--primary" href="' + f.url + '" target="_blank" rel="noopener">앱 열기 <span class="arrow" aria-hidden="true">↗</span></a>' : '') +
@@ -101,12 +112,12 @@
       '</article>';
   }
 
-  var others = S.apps.filter(function (a) { return !a.featured; })
+  var others = shown.filter(function (a) { return a !== f; })
     .sort(function (a, b) { return (a.state === 'wip') - (b.state === 'wip'); });
   document.getElementById('apps-list').innerHTML = others.map(function (a) {
     // 스크린샷이 없는 앱(개발 중)은 그림 칸 없이 가로로 긴 짧은 카드
     if (!a.img) {
-      return '<li class="apps__wide"><a class="app app--wide" href="' + a.url + '" target="_blank" rel="noopener">' +
+      return '<li class="apps__wide"' + appAttrs(a) + '><a class="app app--wide" href="' + esc(a.url || '#') + '" target="_blank" rel="noopener">' +
         '<div class="app__body">' +
           '<div class="app__head"><h4 class="app__name">' + esc(a.name) + '</h4>' + stateBadge(a) + '</div>' +
           '<p class="app__desc">' + esc(a.desc) + '</p>' +
@@ -114,7 +125,7 @@
           '<p class="app__meta"><span>' + esc(a.meta) + '</span><span class="arrow" aria-hidden="true">↗</span></p></div>' +
         '</div></a></li>';
     }
-    return '<li><a class="app" href="' + a.url + '" target="_blank" rel="noopener">' +
+    return '<li' + appAttrs(a) + '><a class="app" href="' + esc(a.url || '#') + '" target="_blank" rel="noopener">' +
       shot(a, false) +
       '<div class="app__body">' +
         '<div class="badges">' + stateBadge(a) + '</div>' +
@@ -122,26 +133,32 @@
         '<p class="app__desc">' + esc(a.desc) + '</p>' +
         '<ul class="tags" role="list" aria-label="기술">' + a.tags.slice(0, 3).map(function (t) { return '<li class="tag">' + esc(t) + '</li>'; }).join('') + '</ul>' +
         (a.linked ? '<p class="app__linked">' + esc(a.linked) + '</p>' : '') +
-        '<p class="app__meta"><span>' + esc(a.meta) + '</span><span class="arrow" aria-hidden="true">↗</span></p>' +
+        '<p class="app__meta"><span>' + esc(a.meta || '') + '</span><span class="arrow" aria-hidden="true">↗</span></p>' +
       '</div></a></li>';
   }).join('');
+  }
+  renderApps();
 
   /* ───── 대표 수상 ───── */
-  var top = visible.filter(function (c) { return c.type === 'award' && c.featured && isConfirmed(c); })[0];
+  function renderHighlight() {
+  var top = visible.filter(function (c) { return c.type === 'award' && c.featured && isConfirmed(c) && !c.hidden; })[0];
+  var hl = document.getElementById('highlight');
+  hl.hidden = true;
   if (top) {
-    var hl = document.getElementById('highlight');
     hl.innerHTML = AWARD_ICON +
       '<span><span class="highlight__k">대표 수상</span>' + esc(top.title.replace(/\s*\(.*\)$/, '')) + ' ' + esc(top.role) +
       '<span class="highlight__meta">' + esc(top.org) + ' · <time datetime="' + top.date + '">' + esc(top.label) + '</time></span></span>';
     hl.hidden = false;
   }
+  }
+  renderHighlight();
 
   /* ───── 경력 기록부 ───── */
   // 같은 이름의 강의 묶기
   function buildEntries(list) {
     var groups = {}, out = [];
     list.forEach(function (c) {
-      if (c.group) {
+      if (c.group && !ADMIN) {  // 관리자 모드에선 하나씩 고치게 묶지 않는다
         if (!groups[c.group]) { groups[c.group] = { isGroup: true, title: c.group, type: c.type, items: [] }; out.push(groups[c.group]); }
         groups[c.group].items.push(c);
       } else out.push(c);
@@ -164,7 +181,7 @@
   }
 
   function badgeFor(c) {
-    var html = '';
+    var html = c.hidden ? '<span class="badge badge--hidden">숨김</span>' : '';
     if (c.role) {
       var cls = 'badge';
       if (c.type === 'award') cls += ' badge--accent badge--strong';
@@ -207,13 +224,16 @@
     var dateCell = e.isGroup
       ? '<time class="row__date" datetime="' + e.date + '">' + dateHTML(e.label) + '</time>'
       : '<time class="row__date"' + (e.undated ? '' : ' datetime="' + e.date + '"') + '>' + dateHTML(e.label) + '</time>';
-    return '<li class="' + cls + '"><span class="row__dot" aria-hidden="true"></span>' +
+    var attrs = e.isGroup ? '' : ' data-ci="' + S.career.indexOf(e) + '"' + (e.hidden ? ' data-hidden' : '');
+    return '<li class="' + cls + '"' + attrs + '><span class="row__dot" aria-hidden="true"></span>' +
       dateCell + body +
       '<div class="row__badge">' + badgeFor(e) + '</div></li>';
   }
 
   var logEl = document.getElementById('log');
+  var curFilter = 'talks';
   function render(filter) {
+    curFilter = filter;
     var list = visible.filter(function (c) { return c.type === TYPE_OF_FILTER[filter]; });
     var entries = buildEntries(list);
     if (!entries.length) { logEl.innerHTML = '<p class="empty">항목이 없습니다.</p>'; return; }
@@ -267,6 +287,20 @@
   }
   if (!fromHash()) render('talks');
   window.addEventListener('hashchange', fromHash);
+
+  // admin.js가 쓰는 손잡이: 내용을 바꾸고 다시 그리기
+  window.PF = {
+    admin: ADMIN,
+    site: function () { return S; },
+    setSite: function (n) { S = n; window.SITE = n; this.refresh(); },
+    refresh: function () { computeVisible(); renderApps(); renderHighlight(); render(curFilter); },
+    filter: function () { return curFilter; }
+  };
+  if (ADMIN) {
+    var sc = document.createElement('script');
+    sc.src = 'admin.js?v=' + Date.now();
+    document.body.appendChild(sc);
+  }
 
   /* ───── 상단 바 선 ───── */
   var bar = document.getElementById('topbar');
