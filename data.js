@@ -97,6 +97,30 @@ window.SITE = {
       alt: '교실 축구 경기 화면. 도트 그림 빨강·파랑 선수들과 점수판'
     },
     {
+      id: 'class-vote',
+      name: '우리 반 투표',
+      state: 'live',
+      desc: '아이들이 번호로 들어와 라운드마다 후보를 줄여 가며 고르는 반 투표. 표 수는 교사만 보고, 1등은 교사가 열어 줄 때 발표된다.',
+      linked: '반티 고르기에 처음 사용 · 2026.11',
+      tags: ['Cloudflare Workers', 'Durable Objects'],
+      url: 'https://class-vote.class-soccer.workers.dev',
+      meta: 'class-vote.workers.dev',
+      img: 'assets/class-vote.webp', imgW: 1280, imgH: 800,
+      alt: '우리 반 투표 학생 화면. 후보 카드 여섯 개 중 두 개를 고른 모습'
+    },
+    {
+      id: 'kkokko',
+      name: '꼬꼬의 첫 출근',
+      sub: '서·논술형 평가 3D 게임',
+      state: 'wip',
+      desc: '6학년 사회 「우리나라 시장경제의 특징」 서·논술형 평가를, 라면 공장에 첫 출근한 꼬꼬의 하루 속에서 수행한다. 교사 화면에서 답을 판정한다.',
+      tags: ['Three.js', 'Google Apps Script'],
+      url: 'https://github.com/skyang9838-hue/sahoe-seonsul',
+      meta: '코드 보기 · github.com/skyang9838-hue/sahoe-seonsul',
+      img: 'assets/kkokko.webp', imgW: 1280, imgH: 800,
+      alt: '꼬꼬의 첫 출근 시작 포스터. 라면 공장 앞에 선 꼬꼬와 동물 친구들'
+    },
+    {
       id: 'geupji',
       name: '급지.gg',
       state: 'wip',
