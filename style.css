@@ -179,6 +179,8 @@ a:hover .arrow:only-child, .section__aside:hover .arrow { transform: translateX(
 }
 
 /* ───────── SNS ───────── */
+.section.section--awards { padding-top: 32px; }
+.section--awards .highlights { margin-bottom: 0; }
 .section.section--sns { padding-top: 48px; }
 .sns { display: grid; grid-template-columns: 1fr; gap: 16px; }
 @media (min-width: 720px) { .sns--many { grid-template-columns: repeat(3, 1fr); } }
