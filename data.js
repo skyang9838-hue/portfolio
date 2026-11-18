@@ -110,13 +110,13 @@ window.SITE = {
       id: 'class-vote',
       name: '우리 반 투표',
       state: 'live',
-      desc: '아이들이 번호로 들어와 라운드마다 후보를 줄여 가며 고르는 반 투표. 표 수는 교사만 보고, 1등은 교사가 열어 줄 때 발표된다.',
+      desc: '아이들이 번호로 들어와 라운드마다 후보를 줄여 가며 고르는 반 투표. 교사 화면에서 라운드를 열고 닫고, 표 수와 번호별 선택을 보거나 숨긴다. 1등은 교사가 열어 줄 때 발표된다.',
       linked: '반티 고르기에 처음 사용 · 2026.11',
       tags: ['Cloudflare Workers', 'Durable Objects'],
-      url: 'https://class-vote.class-soccer.workers.dev',
-      meta: 'class-vote.workers.dev',
+      url: 'https://class-vote.class-soccer.workers.dev/teacher',
+      meta: 'class-vote.workers.dev/teacher',
       img: 'assets/class-vote.webp', imgW: 1280, imgH: 800,
-      alt: '우리 반 투표 학생 화면. 후보 카드 여섯 개 중 두 개를 고른 모습'
+      alt: '우리 반 투표 교사 화면. 1라운드 표 수 막대와 항목별로 고른 번호 목록'
     },
     {
       id: 'kkokko',
