@@ -586,3 +586,16 @@ a.highlight:hover { filter: brightness(1.08); }
 
 /* hidden 속성이 display 규칙에 지지 않게 */
 [hidden] { display: none !important; }
+
+/* 수상: 한 줄에 하나씩 크게 (2026-11-19 사용자) */
+.highlights { grid-template-columns: 1fr !important; gap: 16px; }
+.highlights .highlight { padding: 24px 28px; gap: 16px; font-size: 20px; align-items: center; }
+.highlights .highlight svg { width: 22px; height: 22px; align-self: center; margin-top: 0; }
+.highlights .highlight__k { font-size: 14px; margin-bottom: 6px; }
+.highlights .highlight__meta { font-size: 15px; margin-top: 6px; }
+.highlights .highlight__thumb { width: 256px; height: 160px; border-radius: 12px; }
+@media (max-width: 640px) {
+  .highlights .highlight { flex-wrap: wrap; padding: 20px; font-size: 17px; }
+  .highlights .highlight__text { flex-basis: calc(100% - 40px); }
+  .highlights .highlight__thumb { order: -1; width: 100%; height: auto; aspect-ratio: 16 / 10; }
+}
