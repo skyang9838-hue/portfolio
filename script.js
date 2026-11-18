@@ -133,6 +133,21 @@
   }
   renderApps();
 
+  /* ───── 웹앱 / 강의자료 고르기 ───── */
+  var workTabs = Array.prototype.slice.call(document.querySelectorAll('[data-work]'));
+  function setWork(k) {
+    if (k !== 'materials') k = 'apps';
+    workTabs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-work') === k)); });
+    document.getElementById('apps-list').hidden = k !== 'apps';
+    document.getElementById('materials-list').hidden = k !== 'materials';
+    var gh = document.getElementById('gh-link'); if (gh) gh.hidden = k !== 'apps';
+  }
+  workTabs.forEach(function (b) { b.addEventListener('click', function () { setWork(b.getAttribute('data-work')); }); });
+  Array.prototype.forEach.call(document.querySelectorAll('a[href="#apps"], a[href="#materials"]'), function (a) {
+    a.addEventListener('click', function () { setWork(a.getAttribute('href') === '#materials' ? 'materials' : 'apps'); });
+  });
+  if (location.hash === '#materials') setWork('materials');
+
   /* ───── 대표 수상 ───── */
   function renderHighlight() {
   var tops = visible.filter(function (c) { return c.type === 'award' && c.featured && isConfirmed(c) && !c.hidden; })
@@ -140,9 +155,13 @@
   var hl = document.getElementById('highlight');
   hl.hidden = !tops.length;
   hl.innerHTML = tops.map(function (top) {
-    return '<p class="highlight">' + AWARD_ICON +
-      '<span><span class="highlight__k">수상</span>' + esc(top.title.replace(/\s*\(.*\)$/, '')) + ' ' + esc(top.role) +
-      '<span class="highlight__meta">' + esc(top.org) + ' · <time datetime="' + top.date + '">' + esc(top.label) + '</time></span></span></p>';
+    var app = top.app ? S.apps.filter(function (a) { return a.id === top.app; })[0] : null;
+    var thumb = app && app.img ? '<img class="highlight__thumb" src="' + app.img + '" width="' + app.imgW + '" height="' + app.imgH + '" alt="' + esc(app.name) + ' 화면" loading="lazy" decoding="async">' : '';
+    var link = app ? (app.url || app.repo) : null;
+    var inner = AWARD_ICON +
+      '<span class="highlight__text"><span class="highlight__k">수상' + (app ? ' · ' + esc(app.name) : '') + '</span>' + esc(top.title.replace(/\s*\(.*\)$/, '')) + ' ' + esc(top.role) +
+      '<span class="highlight__meta">' + esc(top.org) + ' · <time datetime="' + top.date + '">' + esc(top.label) + '</time></span></span>' + thumb;
+    return link ? '<a class="highlight" href="' + esc(link) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<p class="highlight">' + inner + '</p>';
   }).join('');
   }
   renderHighlight();
@@ -259,7 +278,7 @@
     }).join('').replace(/<ul class="rows" role="list"><\/ul>/g, '');
   }
 
-  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#career .chip'));
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function setFilter(k, fromUser) {

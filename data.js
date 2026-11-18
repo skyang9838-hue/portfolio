@@ -170,10 +170,9 @@ window.SITE = {
   // 강의자료 칸: 표지만 보인다 (강의안 파일은 비공개, 링크 없음 — 2026-11-19 사용자)
   materials: [
     { id: 'talk-1118', date: '2026-11-18', label: '2026.11.18', title: '디지털과 연계한 발명 수업', org: '학교로 찾아가는 과학발명교실연수 · 인천효성초', img: 'assets/talk-1118.webp', imgW: 1280, imgH: 720, alt: '디지털과 연계한 발명 수업 표지. 전구 그림' },
-    { id: 'talk-1103', date: '2026-11-03', label: '2026.11.03', title: '고민을 담은 솔직한 공개수업 이야기 (하반기)', org: '북부 수업나눔교사(5기) 수업 성찰 나눔 연수', img: 'assets/talk-1103.webp', imgW: 1280, imgH: 720, alt: '하반기 수업 성찰 나눔 표지. 11.03이 적힌 민트색 원' },
+    { id: 'talk-1103', date: '2026-11-03', label: '2026.07 – 11 · 2회', title: '고민을 담은 솔직한 공개수업 이야기', org: '북부 수업나눔교사(5기) 수업 성찰 나눔 연수 (상·하반기)', img: 'assets/talk-1103.webp', imgW: 1280, imgH: 720, alt: '하반기 수업 성찰 나눔 표지. 11.03이 적힌 민트색 원' },
     { id: 'talk-1029', date: '2026-10-29', label: '2026.10.29', title: '생성형 AI를 활용한 교육 자료 개발', org: '2026 국어 연합학술제', img: 'assets/talk-1029.webp', imgW: 1280, imgH: 720, alt: '생성형 AI를 활용한 교육 자료 개발 표지. 초록 공룡 캐릭터' },
-    { id: 'talk-1016', date: '2026-10-16', label: '2026.10.16', title: '나만의 AI Agent 업무 비서 만들기', org: 'ACE연구회 AI TED', img: 'assets/talk-1016.webp', imgW: 1280, imgH: 720, alt: '나만의 AI Agent 업무 비서 만들기 표지' },
-    { id: 'talk-0720', date: '2026-07-20', label: '2026.07.20', title: '고민을 담은 솔직한 공개수업 이야기 (상반기)', org: '북부 수업나눔교사(5기) 수업 성찰 나눔 연수', img: 'assets/talk-0720.webp', imgW: 1280, imgH: 720, alt: '상반기 수업 성찰 나눔 표지. 열린 교실 문 그림' }
+    { id: 'talk-1016', date: '2026-10-16', label: '2026.10.16', title: '나만의 AI Agent 업무 비서 만들기', org: 'ACE연구회 AI TED', img: 'assets/talk-1016.webp', imgW: 1280, imgH: 720, alt: '나만의 AI Agent 업무 비서 만들기 표지' }
   ],
 
   /* type: talk(강의·발표) · role(위촉·연구회·지원) · award(수상) · training(받은 연수) */
@@ -203,8 +202,8 @@ window.SITE = {
     { type: 'role', date: '2026-11-09', label: '2026.11.09', title: '발명교육 봉사 (인천해서초)', org: '발명교육지원단', role: '봉사', status: '' },
 
     /* ── 수상 ── */
-    { type: 'award', featured: true, date: '2026-11-18', label: '2026.11.18', title: '2026 디지털윤리 창작콘텐츠 공모전 교사 부문 (AI TRACE)', org: '한국지능정보사회진흥원(NIA)', role: '한국교육방송공사 사장상', status: '' },
-    { type: 'award', featured: true, date: '2026-10-14', label: '2026.10.14', title: '제5회 인천 초등 수업사례 공모전 (글쓰기 수업 AI 코칭·DINO)', org: '인천광역시교육청', role: '교육감상', status: '' },
+    { type: 'award', featured: true, app: 'ai-trace', date: '2026-11-18', label: '2026.11.18', title: '2026 디지털윤리 창작콘텐츠 공모전 교사 부문 (AI TRACE)', org: '한국지능정보사회진흥원(NIA)', role: '한국교육방송공사 사장상', status: '' },
+    { type: 'award', featured: true, app: 'dino', date: '2026-10-14', label: '2026.10.14', title: '제5회 인천 초등 수업사례 공모전 (글쓰기 수업 AI 코칭·DINO)', org: '인천광역시교육청', role: '교육감상', status: '' },
 
     /* ── 받은 연수 ── */
     { type: 'training', date: '2026-03-01', label: '2026 전기 –', title: '경인교육대학교 교육전문대학원 석사과정 (인공지능융합교육전공)', org: '경인교육대학교', role: '재학 중', status: '' },
