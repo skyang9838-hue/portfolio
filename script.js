@@ -215,11 +215,17 @@
     if (e.isGroup) {
       body = '<h4 class="row__title">' + esc(e.title) + '<span class="badge count">' + e.items.length + '회</span></h4>' +
         '<div class="row__subs">' + e.items.map(function (i) {
-          return '<span class="row__sub"><time datetime="' + i.date + '">' + esc(i.label) + '</time> <b>' + esc(i.note || '') + '</b> · ' + esc(i.org) + '</span>';
+          var il = ADMIN && window.PF_LECTURES ? window.PF_LECTURES.filter(function (l) { return l.date === i.date; }) : [];
+          return '<span class="row__sub"><time datetime="' + i.date + '">' + esc(i.label) + '</time> <b>' + esc(i.note || '') + '</b> · ' + esc(i.org) +
+            il.map(function (l) { return '<span class="row__lecture">🔒 강의안 · ' + esc(l.title) + (l.where ? ' <small>(' + esc(l.where) + ')</small>' : '') + '</span>'; }).join('') + '</span>';
         }).join('') + '</div>';
     } else {
+      var lec = ADMIN && window.PF_LECTURES ? window.PF_LECTURES.filter(function (l) { return l.date === e.date; }) : [];
       body = '<h4 class="row__title">' + esc(e.title) + '</h4>' +
-        '<p class="row__org">' + esc(e.org) + '</p>';
+        '<p class="row__org">' + esc(e.org) +
+          (e.material ? ' · <a class="row__link" href="' + esc(e.material.url) + '" target="_blank" rel="noopener">' + esc(e.material.label) + ' <span aria-hidden="true">↗</span></a>' : '') +
+          lec.map(function (l) { return '<span class="row__lecture">🔒 강의안 · ' + esc(l.title) + (l.where ? ' <small>(' + esc(l.where) + ')</small>' : '') + '</span>'; }).join('') +
+        '</p>';
     }
     var dateCell = e.isGroup
       ? '<time class="row__date" datetime="' + e.date + '">' + dateHTML(e.label) + '</time>'

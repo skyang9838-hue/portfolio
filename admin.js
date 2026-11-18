@@ -199,11 +199,30 @@
       saved = snapshot();
       loaded = true;
       updateBar();
+      loadLectures();
     }).catch(function (e) {
       loaded = false;
       updateBar();
       if (e && e.token) { setMsg(e.msg); tokenDlg(e.msg); }
       else setMsg('불러오기 실패: ' + (e && e.message || e));
+    });
+  }
+
+  /* ───── 강의안 (비공개 저장소, 관리자 모드에서만) ─────
+     skyang9838-hue/portfolio-private 의 lectures.json 을 같은 토큰으로 읽는다.
+     토큰에 그 저장소가 없으면 조용히 건너뛰고 안내만 남긴다. */
+  function loadLectures() {
+    fetch('https://api.github.com/repos/skyang9838-hue/portfolio-private/contents/lectures.json?ref=main&t=' + Date.now(), {
+      headers: { 'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' },
+      cache: 'no-store'
+    }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    }).then(function (j) {
+      window.PF_LECTURES = JSON.parse(b64decode(j.content));
+      PF.refresh();
+    }).catch(function (e) {
+      console.warn('강의안 못 불러옴 (' + e.message + ') — 토큰에 portfolio-private 저장소(Contents 읽기)를 추가해 주세요');
     });
   }
 

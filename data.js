@@ -22,7 +22,7 @@
   메모: 디노는 미완성이라 앱 링크(url)를 내림 (2026-11-12). 위촉·연구회(role)는 화면에서 뺐고 데이터만 남김.
 */
 window.SITE = {
-  asOf: '2026-11-16',
+  asOf: '2026-11-19',
 
   // 맨 위 SNS 카드. 유튜브·인스타는 주소가 생기면 한 줄씩 보탠다.
   sns: [
@@ -131,6 +131,56 @@ window.SITE = {
       alt: '꼬꼬의 첫 출근 시작 포스터. 라면 공장 앞에 선 꼬꼬와 동물 친구들'
     },
     {
+      id: 'ai-trace',
+      name: 'AI TRACE',
+      sub: '디지털 수사 기록 · CASE #01',
+      state: 'live',
+      desc: '「낯선 DM」 사건을 수사 기록처럼 따라가며 디지털 윤리를 생각해 보는 수업용 웹앱.',
+      award: '2026 디지털윤리 창작콘텐츠 공모전 한국교육방송공사 사장상',
+      awardDate: '2026.11',
+      tags: ['HTML', 'JavaScript', 'GitHub Pages'],
+      url: 'https://skyang9838-hue.github.io/ai-trace/',
+      meta: 'github.io/ai-trace',
+      img: 'assets/ai-trace.webp', imgW: 1280, imgH: 800,
+      alt: 'AI TRACE 첫 화면. 찢긴 사진 조각들로 만든 마스크 쓴 인물과 눌러서 시작 버튼'
+    },
+    {
+      id: 'invention-lab',
+      name: '발명 연수 실습·자료',
+      state: 'live',
+      desc: '티처블머신 실습 순서와 수업 자료 묶음을 한 페이지에 모은 연수 배포 페이지.',
+      linked: '학교로 찾아가는 과학발명교실연수 (인천효성초) · 2026.11.18',
+      tags: ['HTML', 'GitHub Pages'],
+      url: 'https://skyang9838-hue.github.io/invention-lab/',
+      meta: 'github.io/invention-lab',
+      img: 'assets/invention-lab.webp', imgW: 1280, imgH: 800,
+      alt: '디지털과 연계한 발명 수업 실습·자료 표지. 왼쪽 목차와 전구 그림'
+    },
+    {
+      id: 'invention-dice',
+      name: '발명 주사위',
+      state: 'live',
+      desc: '물건과 발명 기법을 무작위로 뽑아 발명 아이디어를 떠올리게 하는 주사위.',
+      linked: '6학년 수업·교사 발명연수에서 사용 · 2026.11',
+      tags: ['HTML', 'GitHub Pages'],
+      url: 'https://skyang9838-hue.github.io/invention-dice/',
+      meta: 'github.io/invention-dice',
+      img: 'assets/invention-dice.webp', imgW: 1280, imgH: 800,
+      alt: '발명 주사위 화면. 글자판 두 줄과 주사위 굴리기 버튼'
+    },
+    {
+      id: 'pyeongeo-helper',
+      name: '성적 평어 도우미',
+      sub: '6학년 2학기',
+      state: 'live',
+      desc: '성취기준마다 ◎○△를 누르면 교과 평어 문장을 만들어 준다. 학생 이름은 받지 않는다.',
+      tags: ['HTML', 'GitHub Pages'],
+      url: 'https://skyang9838-hue.github.io/pyeongeo-helper/',
+      meta: 'github.io/pyeongeo-helper',
+      img: 'assets/pyeongeo-helper.webp', imgW: 1280, imgH: 800,
+      alt: '성적 평어 도우미 국어 화면. 번호별로 성취기준 ◎○△ 단추가 놓인 표'
+    },
+    {
       id: 'geupji',
       name: '급지.gg',
       state: 'wip',
@@ -148,13 +198,13 @@ window.SITE = {
     { type: 'talk', group: '북부 수업나눔교사(5기) 수업 성찰 나눔 연수', groupLabel: '2026.07 – 11', date: '2026-07-20', label: '2026.07.20', title: '북부 수업나눔교사(5기) 상반기 수업 성찰 나눔 연수', note: '상반기', org: '북부교육지원청', role: '강사', status: '' },
     { type: 'talk', date: '2026-09-15', label: '2026.09.15', title: '「디지털 기반 학생 맞춤형 코칭 서·논술형 평가 설계」 연수', org: '서부교육지원청', role: '보조강사', status: '' },
     { type: 'talk', date: '2026-10-14', label: '2026.10.14', title: '인천 초등교육 페스티벌 수상작 발표', org: '인천광역시교육청', role: '발표자', status: '' },
-    { type: 'talk', date: '2026-10-16', label: '2026.10.16', title: 'ACE연구회 AI TED 「나만의 AI Agent 업무 비서 만들기」', org: 'ACE연구회', role: '강사', status: '' },
+    { type: 'talk', date: '2026-10-16', label: '2026.10.16', title: 'ACE연구회 AI TED 「나만의 AI Agent 업무 비서 만들기」', org: 'ACE연구회', role: '강사', status: '', material: { label: '실습 페이지', url: 'https://skyang9838-hue.github.io/ace-agent-lab/' } },
     { type: 'talk', date: '2026-10-19', label: '2026.10.19', title: '「AI·디지털 활용 교육과정-수업-평가 실천」 2차 (수업 도구 만들기)', org: '북부교육지원청', role: '보조강사', status: '' },
     { type: 'talk', date: '2026-10-29', label: '2026.10.29', title: '국어 연합학술제 「생성형 AI를 활용한 교육 자료 개발 — 활동지 제작부터 서·논술형 평가까지」', org: '국어 관련 전학공 연합학술제', role: '강사', status: '' },
     { type: 'talk', date: '2026-10-30', label: '2026.10.30', title: 'SE4A 연합학술제 웹앱 소개 발표', org: 'SE4A', role: '발표자', status: '' },
     { type: 'talk', group: '북부 수업나눔교사(5기) 수업 성찰 나눔 연수', date: '2026-11-03', label: '2026.11.03', title: '북부 수업나눔교사(5기) 하반기 수업 성찰 나눔 연수', note: '하반기', org: '북부교육지원청', role: '강사', status: '' },
     { type: 'talk', date: '2026-11-04', label: '2026.11.04', title: '읽걷쓰AI 리더십 실천 워크숍 (관리자 대상) 「코딩없이 말로 만드는 학교 업무 도구 1」', org: '인천광역시교육청 융합인재교육과', role: '보조강사', status: '' },
-    { type: 'talk', date: '2026-11-18', label: '2026.11.18', title: '학교로 찾아가는 과학발명교실연수 「디지털과 연계한 발명 수업」 (인천효성초)', org: '인천광역시교육청 융합인재교육과 · 발명교육지원단', role: '강사', status: '예정' },
+    { type: 'talk', date: '2026-11-18', label: '2026.11.18', title: '학교로 찾아가는 과학발명교실연수 「디지털과 연계한 발명 수업」 (인천효성초)', org: '인천광역시교육청 융합인재교육과 · 발명교육지원단', role: '강사', status: '', material: { label: '실습·자료 덱', url: 'https://skyang9838-hue.github.io/invention-lab/' } },
 
     /* ── 위촉·연구회·지원 ── */
     { type: 'role', date: '2026-09-01', label: '2026.09 –', title: 'KERIS 인공지능 융합 연구회 「얼죽아」 — 6차시 수업 자료 개발', org: '한국교육학술정보원(KERIS)', role: '연구원', status: '' },
@@ -169,6 +219,7 @@ window.SITE = {
     { type: 'role', date: '2026-11-09', label: '2026.11.09', title: '발명교육 봉사 (인천해서초)', org: '발명교육지원단', role: '봉사', status: '' },
 
     /* ── 수상 ── */
+    { type: 'award', date: '2026-11-18', label: '2026.11.18', title: '2026 디지털윤리 창작콘텐츠 공모전 교사 부문 (AI TRACE)', org: '한국지능정보사회진흥원(NIA)', role: '한국교육방송공사 사장상', status: '' },
     { type: 'award', featured: true, date: '2026-10-14', label: '2026.10.14', title: '제5회 인천 초등 수업사례 공모전 (글쓰기 수업 AI 코칭·DINO)', org: '인천광역시교육청', role: '교육감상', status: '' },
 
     /* ── 받은 연수 ── */

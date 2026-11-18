@@ -495,6 +495,10 @@ a:hover .arrow:only-child, .section__aside:hover .arrow { transform: translateX(
 @media (min-width: 640px) { .row__title { margin-top: 0; } }
 .row__title .count { margin-left: 6px; vertical-align: 2px; }
 .row__org { grid-area: org; font-size: var(--fs-meta); font-weight: 500; line-height: 1.5; color: var(--text-3); }
+.row__link { color: var(--text-2); text-decoration: underline; text-underline-offset: 2px; }
+.row__link:hover { color: var(--text-1, inherit); }
+.row__lecture { display: block; margin-top: 2px; color: var(--text-2); }
+.row__lecture small { color: var(--text-3); font-size: inherit; }
 .row__badge { grid-area: badge; display: flex; align-items: flex-start; justify-content: flex-end; gap: 6px; flex-wrap: wrap; }
 .dday {
   font-size: var(--fs-badge); font-weight: 700; color: var(--accent-text);
