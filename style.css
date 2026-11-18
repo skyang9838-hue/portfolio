@@ -408,6 +408,12 @@ a:hover .arrow:only-child, .section__aside:hover .arrow { transform: translateX(
   border-radius: 16px; background: var(--accent-weak);
   color: var(--text); font-size: 15px; font-weight: 600; line-height: 1.5;
 }
+.highlights { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 32px; }
+@media (min-width: 640px) { .highlights { grid-template-columns: 1fr 1fr; } }
+.highlights .highlight { margin-bottom: 0; }
+.app__award { display: flex; gap: 6px; align-items: flex-start; margin-top: 8px; font-size: var(--fs-meta); font-weight: 600; color: var(--accent-text); line-height: 1.5; }
+.app__award svg { flex: none; width: 14px; height: 14px; margin-top: 3px; }
+.app--static { cursor: default; }
 .highlight svg { flex: none; margin-top: 2px; color: var(--accent-text); }
 .highlight__k { display: block; font-size: var(--fs-badge); font-weight: 500; color: var(--accent-text); margin-bottom: 2px; }
 .highlight__meta { display: block; margin-top: 2px; font-size: var(--fs-meta); font-weight: 500; color: var(--text-2); }

@@ -92,28 +92,9 @@
 
   function renderApps() {
   var shown = S.apps.filter(function (a) { return ADMIN || !a.hidden; });
-  var f = shown.filter(function (a) { return a.featured; })[0];
-  document.getElementById('featured').innerHTML = '';
-  if (f) {
-    document.getElementById('featured').innerHTML =
-      '<article class="feature"' + appAttrs(f) + ' aria-labelledby="app-' + f.id + '">' +
-        '<div class="feature__media">' + (f.url ? '<a href="' + f.url + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">' + shot(f, false) + '</a>' : shot(f, false)) + '</div>' +
-        '<div class="feature__body">' +
-          '<div class="badges"><span class="badge badge--accent badge--strong">대표작</span>' + stateBadge(f) + '</div>' +
-          '<h3 class="feature__name" id="app-' + f.id + '">' + esc(f.name) + (f.nameEn ? ' <small>' + esc(f.nameEn) + '</small>' : '') + '</h3>' +
-          '<p class="feature__desc">' + esc(f.desc) + '</p>' +
-          (f.award ? '<p class="feature__award">' + AWARD_ICON + '<span>' + esc(f.award) + (f.awardDate ? ' <span class="award__date"><span class="award__sep">· </span>' + esc(f.awardDate) + '</span>' : '') + '</span></p>' : '') +
-          '<ul class="tags" role="list" aria-label="기술">' + f.tags.map(function (t) { return '<li class="tag">' + esc(t) + '</li>'; }).join('') + '</ul>' +
-          '<div class="feature__links">' +
-            (f.url ? '<a class="btn btn--primary" href="' + f.url + '" target="_blank" rel="noopener">앱 열기 <span class="arrow" aria-hidden="true">↗</span></a>' : '') +
-            (f.repo ? '<a class="btn btn--ghost" href="' + f.repo + '" target="_blank" rel="noopener">코드 보기 <span class="arrow" aria-hidden="true">↗</span></a>' : '') +
-          '</div>' +
-        '</div>' +
-      '</article>';
-  }
-
-  var others = shown.filter(function (a) { return a !== f; })
-    .sort(function (a, b) { return (a.state === 'wip') - (b.state === 'wip'); });
+  // 같은 위계: 수상작 → 공개 중 → 개발 중 (2026-11-19 사용자)
+  var rank = function (a) { return a.award ? 0 : (a.state === 'wip' ? 2 : 1); };
+  var others = shown.slice().sort(function (a, b) { return rank(a) - rank(b); });
   document.getElementById('apps-list').innerHTML = others.map(function (a) {
     // 스크린샷이 없는 앱(개발 중)은 그림 칸 없이 가로로 긴 짧은 카드
     if (!a.img) {
@@ -125,31 +106,44 @@
           '<p class="app__meta"><span>' + esc(a.meta) + '</span><span class="arrow" aria-hidden="true">↗</span></p></div>' +
         '</div></a></li>';
     }
-    return '<li' + appAttrs(a) + '><a class="app" href="' + esc(a.url || '#') + '" target="_blank" rel="noopener">' +
+    return '<li' + appAttrs(a) + '><a class="app" href="' + esc(a.url || a.repo || '#') + '" target="_blank" rel="noopener">' +
       shot(a, false) +
       '<div class="app__body">' +
         '<div class="badges">' + stateBadge(a) + '</div>' +
         '<h4 class="app__name">' + esc(a.name) + (a.sub ? '<small>' + esc(a.sub) + '</small>' : '') + '</h4>' +
         '<p class="app__desc">' + esc(a.desc) + '</p>' +
+        (a.award ? '<p class="app__award">' + AWARD_ICON + '<span>' + esc(a.award) + (a.awardDate ? ' · ' + esc(a.awardDate) : '') + '</span></p>' : '') +
         '<ul class="tags" role="list" aria-label="기술">' + a.tags.slice(0, 3).map(function (t) { return '<li class="tag">' + esc(t) + '</li>'; }).join('') + '</ul>' +
         (a.linked ? '<p class="app__linked">' + esc(a.linked) + '</p>' : '') +
-        '<p class="app__meta"><span>' + esc(a.meta || '') + '</span><span class="arrow" aria-hidden="true">↗</span></p>' +
+        '<p class="app__meta"><span>' + esc(a.meta || (a.repo ? '코드 보기' : '')) + '</span><span class="arrow" aria-hidden="true">↗</span></p>' +
       '</div></a></li>';
+  }).join('');
+
+  // 강의자료: 표지만 (링크 없음)
+  var ml = document.getElementById('materials-list');
+  if (ml) ml.innerHTML = (S.materials || []).filter(function (m) { return ADMIN || !m.hidden; }).map(function (m) {
+    return '<li><div class="app app--static">' +
+      '<div class="shot"><div class="shot__bar" aria-hidden="true"></div><img class="shot__img" src="' + m.img + '" width="' + m.imgW + '" height="' + m.imgH + '" alt="' + esc(m.alt) + '" loading="lazy" decoding="async"></div>' +
+      '<div class="app__body">' +
+        '<h4 class="app__name">' + esc(m.title) + '</h4>' +
+        '<p class="app__linked">' + esc(m.org) + '</p>' +
+        '<p class="app__meta"><time datetime="' + m.date + '">' + esc(m.label) + '</time></p>' +
+      '</div></div></li>';
   }).join('');
   }
   renderApps();
 
   /* ───── 대표 수상 ───── */
   function renderHighlight() {
-  var top = visible.filter(function (c) { return c.type === 'award' && c.featured && isConfirmed(c) && !c.hidden; })[0];
+  var tops = visible.filter(function (c) { return c.type === 'award' && c.featured && isConfirmed(c) && !c.hidden; })
+    .sort(function (a, b) { return a.date < b.date ? 1 : -1; });
   var hl = document.getElementById('highlight');
-  hl.hidden = true;
-  if (top) {
-    hl.innerHTML = AWARD_ICON +
-      '<span><span class="highlight__k">대표 수상</span>' + esc(top.title.replace(/\s*\(.*\)$/, '')) + ' ' + esc(top.role) +
-      '<span class="highlight__meta">' + esc(top.org) + ' · <time datetime="' + top.date + '">' + esc(top.label) + '</time></span></span>';
-    hl.hidden = false;
-  }
+  hl.hidden = !tops.length;
+  hl.innerHTML = tops.map(function (top) {
+    return '<p class="highlight">' + AWARD_ICON +
+      '<span><span class="highlight__k">수상</span>' + esc(top.title.replace(/\s*\(.*\)$/, '')) + ' ' + esc(top.role) +
+      '<span class="highlight__meta">' + esc(top.org) + ' · <time datetime="' + top.date + '">' + esc(top.label) + '</time></span></span></p>';
+  }).join('');
   }
   renderHighlight();
 

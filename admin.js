@@ -238,7 +238,7 @@
     var parts = keys.map(function (k) {
       var v = S[k];
       if (k === 'apps') return '  apps: [\n' + v.map(function (a) { return '    ' + objLines(a, '    '); }).join(',\n') + '\n  ]';
-      if (k === 'career' || k === 'sns') return '  ' + k + ': [\n' + v.map(function (c) { return '    ' + ser(c); }).join(',\n') + '\n  ]';
+      if (k === 'career' || k === 'sns' || k === 'materials') return '  ' + k + ': [\n' + v.map(function (c) { return '    ' + ser(c); }).join(',\n') + '\n  ]';
       return '  ' + k + ': ' + ser(v);
     });
     return header + 'window.SITE = {\n' + parts.join(',\n\n') + '\n};\n';
