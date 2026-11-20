@@ -156,7 +156,8 @@
   hl.hidden = !tops.length;
   hl.innerHTML = tops.map(function (top) {
     var app = top.app ? S.apps.filter(function (a) { return a.id === top.app; })[0] : null;
-    var thumb = app && app.img ? '<img class="highlight__thumb" src="' + app.img + '" width="' + app.imgW + '" height="' + app.imgH + '" alt="' + esc(app.name) + ' 화면" loading="lazy" decoding="async">' : '';
+    var thumb = app && app.img ? '<img class="highlight__thumb" src="' + app.img + '" width="' + app.imgW + '" height="' + app.imgH + '" alt="' + esc(app.name) + ' 화면" loading="lazy" decoding="async">'
+      : top.img ? '<img class="highlight__thumb" src="' + top.img + '" width="' + top.imgW + '" height="' + top.imgH + '" alt="' + esc(top.alt || '') + '" loading="lazy" decoding="async">' : '';  // 웹앱 없는 수상(영상 등)은 캡처 한 장
     var link = app ? (app.url || app.repo) : null;
     var inner = AWARD_ICON +
       '<span class="highlight__text"><span class="highlight__k">수상' + (app ? ' · ' + esc(app.name) : '') + '</span>' + esc(top.title.replace(/\s*\(.*\)$/, '')) + ' ' + esc(top.role) +

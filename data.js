@@ -202,6 +202,7 @@ window.SITE = {
     { type: 'role', date: '2026-11-09', label: '2026.11.09', title: '발명교육 봉사 (인천해서초)', org: '발명교육지원단', role: '봉사', status: '' },
 
     /* ── 수상 ── */
+    { type: 'award', featured: true, img: 'assets/shorts-minwoo.webp', imgW: 1280, imgH: 720, alt: '영상 첫 장면. 휠체어를 탄 13살 민우 캐릭터', date: '2026-11-19', label: '2026.11.19', title: '2026 디지털기반 교원역량강화연수 우수사례 동영상 공모전 (민우와 떠난 세계 여행)', org: '인천광역시교육청 AI융합교육원', role: '최우수', status: '' },
     { type: 'award', featured: true, app: 'ai-trace', date: '2026-11-18', label: '2026.11.18', title: '2026 디지털윤리 창작콘텐츠 공모전 교사 부문 (AI TRACE)', org: '한국지능정보사회진흥원(NIA)', role: '한국교육방송공사 사장상', status: '' },
     { type: 'award', featured: true, app: 'dino', date: '2026-10-14', label: '2026.10.14', title: '제5회 인천 초등 수업사례 공모전 (글쓰기 수업 AI 코칭·DINO)', org: '인천광역시교육청', role: '교육감상', status: '' },
 
