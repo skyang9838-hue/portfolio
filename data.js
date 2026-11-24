@@ -156,6 +156,17 @@ window.SITE = {
       alt: '성적 평어 도우미 국어 화면. 번호별로 성취기준 ◎○△ 단추가 놓인 표'
     },
     {
+      id: 'bubble-draw',
+      name: '물방울 뽑기',
+      state: 'live',
+      desc: '버튼을 누르면 물방울 하나가 터지며 이름이 나오는 자리 바꾸기·발표자 뽑기. 화면에 인원수가 보이지 않고, 교사 화면에서 학생마다 빼거나 먼저 뽑히게 정할 수 있다. 명단은 그 컴퓨터에만 저장된다.',
+      tags: ['HTML', 'GitHub Pages'],
+      url: 'https://skyang9838-hue.github.io/bubble-draw/',
+      meta: 'github.io/bubble-draw',
+      img: 'assets/bubble-draw.webp', imgW: 1280, imgH: 800,
+      alt: '물방울 뽑기 화면. 흐린 물방울 배경 위 카드에 3번째로 뽑힌 이름이 크게 나온 모습'
+    },
+    {
       id: 'geupji',
       name: '급지.gg',
       state: 'wip',
